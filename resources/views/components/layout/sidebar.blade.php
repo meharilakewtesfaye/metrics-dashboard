@@ -319,6 +319,9 @@
     align-items: center;
     gap: 10px;
     flex: 1;
+    weight: 500;
+    size:13px;
+    font-family:Inter, sans-serif;
 }
 
 .nav-icon {
@@ -377,6 +380,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    size: 13px;
+    weight: 500;
 }
 
 .submenu-item:hover {

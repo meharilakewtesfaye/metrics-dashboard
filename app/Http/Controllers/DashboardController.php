@@ -11,27 +11,13 @@ class DashboardController extends Controller
         return view('dashboard');
     }
 
-    public function getMetricsData(Request $request)
+    public function getChartData()
     {
         return response()->json([
-            'success' => true,
-            'data' => [
-                'mrr' => [
-                    'total' => 14775,
-                    'breakdown' => [
-                        'new_mrr' => 14775,
-                        'upgrades' => 13000,
-                        'downgrades' => 755,
-                    ]
-                ],
-                'arpu' => [
-                    'total' => 10000,
-                    'breakdown' => [
-                        'reactivations' => 10000,
-                        'existing' => 10000,
-                        'churn' => 100,
-                    ]
-                ],
+            'bars' => [
+                ['purple' => 40, 'blue' => 30, 'teal' => 8, 'green' => 6, 'red' => 16],
+                ['purple' => 45, 'blue' => 28, 'teal' => 7, 'green' => 6, 'red' => 14],
+                // ... more bar data
             ]
         ]);
     }

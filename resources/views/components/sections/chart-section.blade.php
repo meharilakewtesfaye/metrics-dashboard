@@ -115,8 +115,8 @@
     background: transparent;
     border: none;
     border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 9px;
+    font-weight: 600;
     color: #94a3b8;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -419,13 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 borderRadius: 0,
                 borderSkipped: false,
             },
-            {
-                label: 'Upgrades',
-                data: [300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 400, 500, 500, 500, 500],
-                backgroundColor: getBarColors('#8987FD', '#8987FD', 19),
-                borderRadius: 0,
-                borderSkipped: false,
-            },
+            
             {
                 label: 'New MRR',
                 data: [1200, 1500, 1600, 1700,1800, 1900, 2000, 3000, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 4000, 4200],

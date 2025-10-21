@@ -12,11 +12,7 @@
         <!-- Right Date Picker -->
         <div class="chart-date">
             <span class="date-display">Jan 2, 2024</span>
-            <span class="date-separator"></span>
-            <span class="date-separator"></span>
-
-            <span class="date-separator"></span>
-
+            <span class="date-separator">-</span>
             <button class="date-dropdown">
                 Last 30 Days
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -62,15 +58,15 @@
         </div>
     </div>
 
-    
-<div class="flex justify-between items-start mb-4">
+    <!-- Legend -->
+    <div class="flex justify-between items-start mb-4 chart-legend-container">
         <div></div> <!-- Empty div to push legend to right -->
         <x-sections.legend />
     </div>
-        <!-- Chart Canvas -->
-        <div class="chart-canvas-container">
-            <canvas id="revenueChart"></canvas>
-        </div>
+
+    <!-- Chart Canvas -->
+    <div class="chart-canvas-container">
+        <canvas id="revenueChart"></canvas>
     </div>
 </div>
 
@@ -79,9 +75,9 @@
     background: #1D1E2B;
     border-radius: 8px;
     border: 1px solid #52525F;
-    padding: 20px 24px 20px 24px;
+    padding: 20px;
     margin-top: 10px;
-    width: 1224px;
+    width: 100%;
 }
 
 /* Header Styles */
@@ -91,6 +87,8 @@
     justify-content: space-between;
     margin-bottom: 24px;
     position: relative;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .chart-title {
@@ -98,21 +96,19 @@
     font-weight: 700;
     color: #f1f5f9;
     margin: 0;
+    order: 1;
 }
 
 .chart-toggle {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 6px;
     padding: 2px;
+    order: 2;
+    justify-content: center;
 }
 
 .toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
     padding: 6px 16px;
-    background: transparent;
     border: none;
     border-radius: 4px;
     font-size: 9px;
@@ -138,6 +134,7 @@
     gap: 12px;
     font-size: 13px;
     color: #94a3b8;
+    order: 2;
 }
 
 .date-display {
@@ -170,7 +167,7 @@
 .metrics-grid-chart {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 16px;
     margin-bottom: 16px;
 }
 
@@ -178,13 +175,13 @@
     background: #1D1E2B;
     border: 1px solid #52525F;
     border-radius: 8px;
-    padding: 20px 20.5px 20.5px 24px;
+    padding: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 276px;
-    height: 69px;
+    width: 100%;
+    min-height: 69px;
     gap: 12px;
 }
 
@@ -202,100 +199,16 @@
     text-align: right;
 }
 
-/* Chart Container */
-.chart-container-wrapper {
-    display: flex;
-    gap: 24px;
-    min-height: 500px;
-    position: relative;
-}
-
-/* Legend Panel */
-.chart-legend-panel {
-    width: 240px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex-shrink: 0;
-}
-
-.legend-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #f1f5f9;
-}
-
-.legend-date {
-    font-size: 12px;
-    font-weight: 500;
-    color: #64748b;
-    margin-top: -8px;
-}
-
-.legend-items {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-}
-
-.legend-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.legend-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.legend-label {
-    flex: 1;
-    font-size: 13px;
-    font-weight: 500;
-    color: #94a3b8;
-}
-
-.legend-value {
-    font-size: 13px;
-    font-weight: 600;
-    color: #f1f5f9;
-}
-
-.legend-total {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    margin-top: 8px;
-}
-
-.legend-label-total {
-    flex: 1;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f1f5f9;
-}
-
-.legend-value-total {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ef4444;
+/* Legend Container */
+.chart-legend-container {
+    margin-bottom: 20px;
 }
 
 /* Chart Canvas */
 .chart-canvas-container {
-    flex: 1;
-    padding: 20px;
-    min-height: 500px;
+    width: 100%;
+    min-height: 400px;
+    position: relative;
 }
 
 #revenueChart {
@@ -309,11 +222,8 @@
     border: none !important;
     border-radius: 8px !important;
     padding: 16px !important;
-    width: 266px !important;
-    height: 177px !important;
-    top: 54px !important;
-    left: 16px !important;
-    gap: 127px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    font-family: Inter, sans-serif !important;
 }
 
 .chartjs-tooltip-key {
@@ -324,7 +234,7 @@
     margin-right: 8px;
 }
 
-/* Responsive */
+/* Responsive Styles */
 @media (max-width: 1200px) {
     .metrics-grid-chart {
         grid-template-columns: repeat(2, 1fr);
@@ -332,28 +242,92 @@
 }
 
 @media (max-width: 900px) {
-    .chart-container-wrapper {
-        flex-direction: column;
-    }
-    
-    .chart-legend-panel {
-        width: 100%;
-    }
-    
     .chart-header {
-        flex-wrap: wrap;
-        gap: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .chart-title {
+        order: 1;
+    }
+    
+    .chart-date {
+        order: 2;
+        align-self: flex-start;
     }
     
     .chart-toggle {
-        position: static;
-        transform: none;
+        order: 3;
+        width: auto;
+        margin-top: 0;
+    }
+    
+    .metrics-grid-chart {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .metric-item {
+        padding: 12px;
+        min-height: 60px;
+    }
+    
+    .metric-value {
+        font-size: 18px;
     }
 }
 
 @media (max-width: 600px) {
+    .chart-card {
+        padding: 16px;
+    }
+    
     .metrics-grid-chart {
         grid-template-columns: 1fr;
+    }
+    
+    .metric-item {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+        gap: 8px;
+    }
+    
+    .metric-value {
+        text-align: left;
+        font-size: 16px;
+    }
+    
+    .chart-date {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .chart-legend-container {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-header {
+        gap: 12px;
+    }
+    
+    .chart-title {
+        font-size: 18px;
+    }
+    
+    .toggle-btn {
+        padding: 6px 12px;
+        font-size: 8px;
+    }
+    
+    .metric-label {
+        font-size: 11px;
+    }
+    
+    .metric-value {
+        font-size: 16px;
     }
 }
 </style>
@@ -433,6 +407,17 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
     
+    // Adjust chart height based on screen size
+    function getChartHeight() {
+        if (window.innerWidth < 600) {
+            return 300;
+        } else if (window.innerWidth < 900) {
+            return 350;
+        } else {
+            return 400;
+        }
+    }
+    
     const config = {
         type: 'bar',
         data: data,
@@ -461,44 +446,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             tooltipEl.style.position = 'absolute';
                             tooltipEl.style.transform = 'translate(-50%, 0)';
                             tooltipEl.style.transition = 'all .1s ease';
-                            tooltipEl.style.width = '266px';
+                            tooltipEl.style.maxWidth = '266px';
+                            tooltipEl.style.width = 'auto';
                             tooltipEl.style.padding = '16px';
                             tooltipEl.style.fontFamily = 'Inter, sans-serif';
                             tooltipEl.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+                            tooltipEl.style.zIndex = '1000';
                             document.body.appendChild(tooltipEl);
-                        }
-                        
-                        // Create or get the arrow indicator
-                        let arrowEl = document.getElementById('chartjs-tooltip-arrow');
-                        if (!arrowEl) {
-                            arrowEl = document.createElement('div');
-                            arrowEl.id = 'chartjs-tooltip-arrow';
-                            arrowEl.style.position = 'absolute';
-                            arrowEl.style.width = '0';
-                            arrowEl.style.height = '0';
-                            arrowEl.style.borderLeft = '8px solid transparent';
-                            arrowEl.style.borderRight = '8px solid transparent';
-                            arrowEl.style.borderTop = '8px solid #2D2E3F';
-                            arrowEl.style.transform = 'translate(-50%, 0)';
-                            arrowEl.style.pointerEvents = 'none';
-                            document.body.appendChild(arrowEl);
-                        }
-                        
-                        // Create or get the dot indicator
-                        let dotEl = document.getElementById('chartjs-tooltip-dot');
-                        if (!dotEl) {
-                            dotEl = document.createElement('div');
-                            dotEl.id = 'chartjs-tooltip-dot';
-                            dotEl.style.position = 'absolute';
-                            dotEl.style.width = '10px';
-                            dotEl.style.height = '10px';
-                            dotEl.style.borderRadius = '50%';
-                            dotEl.style.background = '#EF4444';
-                            dotEl.style.border = '2px solid #2D2E3F';
-                            dotEl.style.transform = 'translate(-50%, -50%)';
-                            dotEl.style.pointerEvents = 'none';
-                            dotEl.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.3)';
-                            document.body.appendChild(dotEl);
                         }
 
                         // Hide if no tooltip
@@ -578,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ticks: {
                         color: '#64748b',
                         font: {
-                            size: 11,
+                            size: window.innerWidth < 600 ? 9 : 11,
                             weight: 500
                         },
                         padding: 8
@@ -595,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ticks: {
                         color: '#64748b',
                         font: {
-                            size: 11,
+                            size: window.innerWidth < 600 ? 9 : 11,
                             weight: 500
                         },
                         padding: 8,
@@ -613,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mode: 'index',
                 intersect: false
             },
-            barThickness: 24,
+            barThickness: window.innerWidth < 600 ? 16 : 24,
             categoryPercentage: 0.8,
             barPercentage: 0.9
         }
@@ -632,6 +586,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const type = this.getAttribute('data-type');
             console.log('Switched to:', type);
         });
+    });
+    
+    // Handle window resize for chart
+    window.addEventListener('resize', function() {
+        chart.update();
     });
 });
 </script>

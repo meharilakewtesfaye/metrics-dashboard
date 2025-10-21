@@ -23,7 +23,6 @@
         }
 
         * { box-sizing: border-box; }
-        html, body {  }
         
         body {
             background: #181921;
@@ -33,6 +32,8 @@
             line-height: 1.4;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
         }
 
         .app { 
@@ -40,7 +41,7 @@
             min-height: 100vh;
         }
 
-        /* Card Styles */
+        /* Glass card styles */
         .glass-card {
             background: linear-gradient(180deg, hsl(var(--muted-panel)) 0%, rgba(255,255,255,0.02) 100%);
             border-radius: var(--card-radius);
@@ -48,95 +49,48 @@
             border: 1px solid rgba(255,255,255,0.03);
         }
 
-        /* Chart segment colors */
-        .seg-purple { background: #c4b5fd; }
-        .seg-blue { background: #60a5fa; }
-        .seg-teal { background: #2dd4bf; }
-        .seg-green { background: #34d399; }
-        .seg-red { background: #fb7185; }
-        .seg-pink { background: #f0abfc; }
-        .seg-grey { background: #94a3b8; }
-
-        /* Legend dots */
-        .dot { 
-            display: inline-block; 
-            width: 10px; 
-            height: 10px; 
-            border-radius: 50%; 
-            margin-right: 6px; 
-            box-shadow: 0 2px 6px rgba(0,0,0,0.6); 
-        }
-        .dot-red { background: #fb7185; }
-        .dot-blue { background: #60a5fa; }
-        .dot-green { background: #34d399; }
-        .dot-teal { background: #22c1c3; }
-        .dot-purple { background: #a78bfa; }
-        .dot-pink { background: #f0abfc; }
-        .dot-grey { background: #9ca3af; }
-
-        @media (max-width: 900px) {
-            .cards-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        /* Main content responsive styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            margin-left: 224px;
+            transition: margin-left 0.3s ease;
         }
 
-        @media (max-width: 600px) {
-            .cards-grid { grid-template-columns: 1fr !important; }
-            .y-axis { display: none !important; }
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            margin-right: 10px;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #1D1E2B;
+            border: 1px solid #292B41;
         }
 
-        /* Add these chart-specific styles */
-.chart-wrap {
-    min-height: 400px;
-}
+        .mobile-menu-btn:hover {
+            background: #374151;
+        }
 
-.bars {
-    min-height: 300px;
-}
-
-.bar {
-    min-height: 40px; /* Ensure bars have minimum height */
-    transition: all 0.3s ease;
-}
-
-.bar:hover {
-    transform: scale(1.05);
-    z-index: 10;
-}
-
-/* Ensure segments are visible */
-.seg {
-    transition: height 0.3s ease;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.seg:last-child {
-    border-bottom: none;
-}
-.sidebar-fixed {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 191px;
-    background: hsl(var(--panel));
-    border-right: 1px solid rgba(255,255,255,0.05);
-    z-index: 1000;
-}
-
-/* Rotate chevron when expanded */
-.expandable-menu.active .chevron-icon {
-    transform: rotate(180deg);
-}
-
-.submenu-container {
-    transition: all 0.3s ease;
-}
-
-/* Better color definitions for segments */
-.seg-purple { background: linear-gradient(to top, #8b5cf6, #a78bfa); }
-.seg-blue { background: linear-gradient(to top, #3b82f6, #60a5fa); }
-.seg-teal { background: linear-gradient(to top, #14b8a6, #2dd4bf); }
-        .seg-green { background: linear-gradient(to top, #10b981, #34d399); }
-        .seg-red { background: linear-gradient(to top, #ef4444, #fb7185); }
+        /* Overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
 
         /* Hide scrollbar for main content */
         .main-content::-webkit-scrollbar {
@@ -147,24 +101,100 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Responsive breakpoints */
+        @media (max-width: 900px) {
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+                padding-top: 60px; /* Space for mobile menu button */
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .sidebar-overlay.mobile-open {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 10px;
+                padding-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>Menu</span>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="app">
         <!-- Sidebar -->
         <x-layout.sidebar />
         
         <!-- Main Content -->
-        <main class="flex-1 p-7 overflow-auto main-content" style="margin-left: 224px;">
-    <x-layout.header />
-    
-    <!-- Metrics Grid -->
-    <x-sections.metrics-grid />
-    
-    <!-- Chart Section -->
-    <x-sections.chart-section />
-</main>
+        <main class="main-content" id="mainContent">
+            <x-layout.header />
+            
+            <!-- Metrics Grid -->
+            <x-sections.metrics-grid />
+            
+            <!-- Chart Section -->
+            <x-sections.chart-section />
+        </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const mainContent = document.getElementById('mainContent');
+
+            function toggleMobileMenu() {
+                sidebar.classList.toggle('mobile-open');
+                sidebarOverlay.classList.toggle('mobile-open');
+                document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            sidebarOverlay.addEventListener('click', toggleMobileMenu);
+
+            // Close sidebar when clicking on a link (for mobile)
+            const navLinks = document.querySelectorAll('.nav-button, .submenu-item');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 900) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 900) {
+                    sidebar.classList.remove('mobile-open');
+                    sidebarOverlay.classList.remove('mobile-open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>

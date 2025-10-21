@@ -1,4 +1,12 @@
-<aside class="sidebar-container">
+<aside class="sidebar-container" id="sidebar">
+    <!-- Close button for mobile -->
+    <button class="sidebar-close-btn" id="sidebarCloseBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+
     <!-- Header: Logo + Name + Avatar -->
     <div class="sidebar-header">
         <div class="brand-section">
@@ -15,6 +23,7 @@
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4615 7.38462C10.4615 9.08395 9.08395 10.4615 7.38462 10.4615C5.68528 10.4615 4.30769 9.08395 4.30769 7.38462C4.30769 5.68528 5.68528 4.30769 7.38462 4.30769C9.08395 4.30769 10.4615 5.68528 10.4615 7.38462ZM10.1517 11.4571C9.36309 11.9938 8.4105 12.3077 7.38462 12.3077C4.66567 12.3077 2.46154 10.1036 2.46154 7.38462C2.46154 4.66567 4.66567 2.46154 7.38462 2.46154C10.1036 2.46154 12.3077 4.66567 12.3077 7.38462C12.3077 8.4105 11.9938 9.36309 11.4571 10.1517L14.4988 13.1935C14.8593 13.554 14.8593 14.1383 14.4988 14.4988C14.1383 14.8593 13.554 14.8593 13.1935 14.4988L10.1517 11.4571Z" fill="#858699"/>
         </svg>
+        <span class="search-text">Search</span>
     </button>
 
     <!-- Navigation Menu -->
@@ -56,7 +65,6 @@
         <div class="nav-group">
             <button class="nav-button expandable open" data-target="management-menu">
                 <div class="nav-content">
-                    <!-- <img src="/img/Group.png" alt="" class="nav-icon"> -->
                     <img src="/img/All-icon (1).png" alt="" class="nav-icon">
                     <span>Management</span>
                 </div>
@@ -77,15 +85,15 @@
                     <img src="/img/Vector (5).png" alt="" class="nav-icon">
                     <span>Category & Tags</span>
                 </button>
+            </div>
         </div>
-    </div>
 
         <!-- Affiliate -->
         <div class="nav-group">
             <button class="nav-button expandable open" data-target="affiliate-menu">
                 <div class="nav-content">
-                <img src="/img/All-icon (5).png" alt="" class="nav-icon">
-                <span>Affiliate</span>
+                    <img src="/img/All-icon (5).png" alt="" class="nav-icon">
+                    <span>Affiliate</span>
                 </div>
                 <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M1.85225 4.10224C2.07192 3.8826 2.42808 3.8826 2.64775 4.10224L6 7.45451L9.35224 4.10224C9.57191 3.8826 9.92809 3.8826 10.1478 4.10224C10.3674 4.32191 10.3674 4.67809 10.1478 4.89776L6.39776 8.64776C6.17809 8.8674 5.82191 8.8674 5.60224 8.64776L1.85225 4.89776C1.63258 4.67809 1.63258 4.32191 1.85225 4.10224Z" fill="#858699"/>
@@ -109,8 +117,7 @@
                     <span>Sales & Commissions</span>
                 </button>
                 <button class="submenu-item">
-                <img src="/img/Vector (5).png" alt="" class="nav-icon">
-
+                    <img src="/img/Vector (5).png" alt="" class="nav-icon">
                     <span>Setting</span>
                 </button>
             </div>
@@ -185,6 +192,7 @@
     overflow-y: auto;
     z-index: 50;
     font-family: Inter, -apple-system, system-ui, sans-serif;
+    transition: transform 0.3s ease;
 }
 
 .sidebar-container::-webkit-scrollbar {
@@ -194,6 +202,25 @@
 .sidebar-container {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+/* Mobile close button */
+.sidebar-close-btn {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    z-index: 51;
+}
+
+.sidebar-close-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Header */
@@ -225,7 +252,7 @@
     border-radius: 4px;
     display: flex;
     align-items: center;
-    justify-center;
+    justify-content: center;
     font-size: 10px;
     font-weight: 600;
     color: #e0e7ff;
@@ -267,12 +294,18 @@
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;
-    margin-bottom:14px
+    margin-bottom:14px;
+    gap: 8px;
 }
 
 .search-bar:hover {
     background: #33364c;
     border-color: #454861;
+}
+
+.search-text {
+    font-size: 14px;
+    color: #858699;
 }
 
 /* Navigation */
@@ -319,8 +352,8 @@
     align-items: center;
     gap: 10px;
     flex: 1;
-    weight: 500;
-    size:13px;
+    font-weight: 500;
+    font-size:13px;
     font-family:Inter, sans-serif;
 }
 
@@ -337,7 +370,7 @@
 }
 
 .nav-button.expandable.open .chevron {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
 }
 
 /* Submenu */
@@ -348,7 +381,7 @@
 }
 
 .submenu {
-        display: none;
+    display: none;
     flex-direction: column;
     gap: 2px;
     padding-left: 8px;
@@ -380,8 +413,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    size: 13px;
-    weight: 500;
 }
 
 .submenu-item:hover {
@@ -434,8 +465,8 @@
     background: #1D1E2B;
     border: 1px solid #292B41;
     border-radius: 4px;
-    width: 191px;
-    height: 98px;
+    width: 100%;
+    height: auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -479,8 +510,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left:16px
-    
+    margin-left:16px;
 }
 
 .import-body p {
@@ -503,11 +533,52 @@
 .import-body a:hover {
     color: #818cf8;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 900px) {
+    .sidebar-container {
+        width: 280px;
+        transform: translateX(-100%);
+    }
+    
+    .sidebar-container.mobile-open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-close-btn {
+        display: block;
+    }
+    
+    .search-text {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-container {
+        width: 100%;
+    }
+    
+    .brand-name {
+        font-size: 16px;
+    }
+    
+    .nav-button {
+        font-size: 16px;
+        padding: 10px 8px;
+    }
+    
+    .submenu-item {
+        font-size: 14px;
+        padding: 8px 8px 8px 30px;
+    }
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const expandableButtons = document.querySelectorAll('.nav-button.expandable');
+    const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
     
     expandableButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -531,6 +602,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (importCard) {
                 importCard.style.display = 'none';
             }
+        });
+    }
+    
+    // Close sidebar on mobile
+    if (sidebarCloseBtn) {
+        sidebarCloseBtn.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('mobile-open');
+            document.body.style.overflow = '';
         });
     }
 });
